@@ -7,14 +7,15 @@ def two_of_two(filename):
     original = Image.open(filename)
     
     original = original.convert("1")
+    #convert the image to grayscale image
     o_pixels = original.load() 
-    
+    print("Size of input image is ",original.size)
     first = Image.new("1", (original.size[0], original.size[1]))
     f_pixels = first.load()
-    
+    #f_pixels is used to store the pixels of first secret image
     second = Image.new("1", (original.size[0], original.size[1]))
     s_pixels = second.load()
-    
+    #s_pixels is used to store the pixels of second secret image
     for i in range(original.size[0]):
         for j in range(original.size[1]):
             if o_pixels[i,j] == 0:
@@ -35,7 +36,8 @@ def two_of_two(filename):
     
     first.save(filename + "_share1.png")
     second.save(filename + "_share2.png")
-    
+    print("Size of share 1 image is ",first.size)
+    print("Size of share 2 image is ",second.size)
     background = first.convert("RGB")
     overlay = second.convert("RGB")
 
